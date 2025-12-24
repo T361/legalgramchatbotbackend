@@ -1,0 +1,277 @@
+/* ============================================================================
+   FAST ROADMAP - CYBERPUNK FUTURISTIC DESIGN
+   Glassmorphism, Radiant Gradients, Sleek Modern Aesthetic
+   ============================================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #fafafa;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-heavy: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-glow: rgba(255, 255, 255, 0.15);
+  --accent-cyan: #00f0ff;
+  --accent-purple: #7000ff;
+  --accent-red: #ff2a2a;
+  --glow-cyan: rgba(0, 240, 255, 0.5);
+  --glow-purple: rgba(112, 0, 255, 0.5);
+  --glow-red: rgba(255, 42, 42, 0.5);
+}
+
+@layer base {
+  html {
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+    height: 100dvh;
+    background-color: #000000;
+    color-scheme: dark;
+  }
+
+  body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background: #000000;
+    color: #fafafa;
+  }
+
+  /* Animated gradient background - now handled by Three.js */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(112, 0, 255, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: gradientPulse 15s ease-in-out infinite;
+  }
+
+  @keyframes gradientPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  button, a, [role="button"] {
+    touch-action: manipulation;
+  }
+
+  input, textarea, select {
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  h1 { font-size: clamp(2rem, 6vw, 4rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+
+  /* Custom scrollbar - Neo-Cyberpunk */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #7000ff 0%, #00f0ff 100%);
+    border-radius: 3px;
+  }
+}
+
+@layer components {
+  /* Glassmorphism card - Heavy blur as per spec */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-heavy {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 
+      0 16px 48px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Glowing border effect - Cyan/Purple */
+  .glow-border {
+    position: relative;
+  }
+  .glow-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, #7000ff, #00f0ff);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .glow-border:hover::before {
+    opacity: 1;
+  }
+
+  /* Gradient text - Cyan to Purple */
+  .gradient-text {
+    background: linear-gradient(135deg, #00f0ff 0%, #7000ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Animated gradient text */
+  .gradient-text-animated {
+    background: linear-gradient(135deg, #00f0ff 0%, #7000ff 50%, #00f0ff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 5s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Cyber button - Wonder.site inspired */
+  .cyber-button {
+    position: relative;
+    background: linear-gradient(135deg, #7000ff 0%, #00f0ff 100%);
+    border: none;
+    padding: 1.25rem 3rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+  }
+  .cyber-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 
+      0 0 50px rgba(0, 240, 255, 0.5),
+      0 0 80px rgba(112, 0, 255, 0.3);
+  }
+
+  /* Red Alert card - Critical warnings */
+  .red-alert {
+    background: rgba(255, 42, 42, 0.08);
+    border: 1px solid rgba(255, 42, 42, 0.4);
+    box-shadow: 
+      0 0 30px rgba(255, 42, 42, 0.15),
+      inset 0 0 30px rgba(255, 42, 42, 0.05);
+    animation: redPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes redPulse {
+    0%, 100% { 
+      box-shadow: 
+        0 0 30px rgba(255, 42, 42, 0.15),
+        inset 0 0 30px rgba(255, 42, 42, 0.05);
+    }
+    50% { 
+      box-shadow: 
+        0 0 50px rgba(255, 42, 42, 0.25),
+        inset 0 0 40px rgba(255, 42, 42, 0.1);
+    }
+  }
+
+  /* Danger alert - Legacy support */
+  .danger-alert {
+    background: linear-gradient(135deg, rgba(255, 42, 42, 0.15) 0%, rgba(255, 42, 42, 0.05) 100%);
+    border: 1px solid rgba(255, 42, 42, 0.4);
+    box-shadow: 
+      0 0 20px rgba(255, 42, 42, 0.15),
+      inset 0 0 20px rgba(255, 42, 42, 0.05);
+  }
+
+  /* Card with hover glow - Floating glass pane */
+  .cyber-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .cyber-card:hover {
+    border-color: rgba(0, 240, 255, 0.3);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(0, 240, 255, 0.1),
+      0 0 80px rgba(112, 0, 255, 0.05);
+    transform: translateY(-4px);
+  }
+
+  /* Neon text glow effect */
+  .neon-glow {
+    text-shadow: 
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 40px currentColor;
+  }
+
+  .cyan-glow {
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+  }
+
+  .purple-glow {
+    text-shadow: 0 0 20px rgba(112, 0, 255, 0.5);
+  }
+
+  .red-glow {
+    text-shadow: 0 0 20px rgba(255, 42, 42, 0.5);
+  }
+
+  /* Animated border */
+  @keyframes borderRotate {
+    0% { --angle: 0deg; }
+    100% { --angle: 360deg; }
+  }
+}
+
+@layer utilities {
+  .touch-target {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .ios-safe-top {
+    padding-top: max(env(safe-area-inset-top), 1rem);
+  }
+
+  .ios-safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+
+  /* Scan line effect */
+  .scan-lines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+  }
+}
