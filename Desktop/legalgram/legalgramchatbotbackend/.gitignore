@@ -58,3 +58,5 @@ htmlcov/
 # Distribution
 *.tar.gz
 *.zip
+venv
+*.pyc
